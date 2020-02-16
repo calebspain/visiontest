@@ -1,13 +1,10 @@
-const vision = require('@google-cloud/vision');
+const express = require('express')
+const app = express()
+const port = 3000
+const getText = require('./getText')
 
-const client = new vision.ImageAnnotatorClient();
+getText()
 
-const fileName = './tates2.jpg';
+app.get('/', (req, res) => res.send('Hello World!'))
 
-async function getTextFromImage() {
-    const [result] = await client.textDetection(fileName);
-    const detections = result.textAnnotations;
-    console.log(`Text: \n${detections[0].description}`);
-}
-
-getTextFromImage();
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
